@@ -1,20 +1,26 @@
-// import {
-//     LOGIN,
-//     REGISTER,
-//     LOGIN_PAGE_UNLOADED,
-//     REGISTER_PAGE_UNLOADED,
-//     ASYNC_START,
-//     UPDATE_FIELD_AUTH
-//   } from '../constants/actionTypes';
+import {
+  APP_LOAD
+    // LOGIN,
+    // REGISTER,
+    // LOGIN_PAGE_UNLOADED,
+    // REGISTER_PAGE_UNLOADED,
+    // ASYNC_START,
+    // UPDATE_FIELD_AUTH
+  } from '../constants/actionType';
+
+
 
 const defaultState = {
-  name: 'bigner'
+  name: 'Boost Up'
 }
 
-const authReducer =  (defaultState, action) => {
-    console.log('**',action)
-    if(action.type === 'CHANGE_NAME') {
-      return { name: action.payload }
+const authReducer =  (state = defaultState, action) => {
+  console.log('action',action)
+    switch(action.type) {
+      case APP_LOAD:
+      return  { ...state , name: action.payload }
+      default:
+      return state;
     }
   
     // switch (action.type) {

@@ -9,11 +9,12 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render((
   <Provider store={store}>
-    <Router history={history}>
+  <App/>
+    {/* <Router history={history}>
       <Switch>
         <Route exact path="/" component={App} />
       </Switch>
-    </Router>
+    </Router> */}
   </Provider>
 ), document.getElementById('root'));
 
