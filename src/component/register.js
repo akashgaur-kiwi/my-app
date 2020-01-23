@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import agent from '../agent'
+import {authActions} from '../actions/auth';
 
 const mapStateToProps = (state) => {
     console.log('mapStateToProps Register', state)
     return  {
-        
+
     }
   };
   
@@ -29,20 +31,23 @@ class Register extends React.Component {
 
     handleChange(event) {
         const { name, value } = event.target;
-        console.log(value, 'pppp',event);
         this.setState({
             [name]: value
         });
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
         console.log(this.state)
         this.setState({ isSubmitted: true });
-        // const { user } = this.state;
-        // if (user.firstName && user.lastName && user.username && user.password) {
-        //     this.props.register(user);
-        // }
+        const { email, password } = this.state;
+        try {
+          const payload = await agent.Auth.register(this.state.userName, email, password);
+          console.log(this.props, '=====',payload)
+          
+        } catch(err) {
+          console.log('err',err)
+        }
     }
 
     render() {
@@ -117,4 +122,8 @@ class Register extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+const actionDispatcher = {
+  register: authActions.register
+}
+
+export default connect(mapStateToProps, actionDispatcher)(Register);
